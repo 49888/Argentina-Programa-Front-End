@@ -1,10 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+
+  template: `
+  
+    <app-header [user]="user"></app-header>
+
+    <router-outlet></router-outlet>
+  `,
+
+  styles: [``]
 })
-export class AppComponent {
-  title = 'Argentina_Programa_Proyecto';
+export class AppComponent implements OnInit {
+  
+  title = 'Argentina Programa Proyecto Final';
+
+  protected user:object | null = null; 
+
+
+  ngOnInit(): void {
+    setTimeout(()=> this.user = {name:"majo"}, 3000);
+  }
+
+  protected setUser():void {
+
+    this.user = this.user ? null : {name:'majo'};
+  }
 }
