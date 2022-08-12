@@ -23,6 +23,9 @@ import { LoadEffects } from './state/AppEffects';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.component';
+import { DB } from './services/db.service';
+import { AngularCropperjsModule } from 'angular-cropperjs';
+import { ModalChartComponent } from './components/modal-chart/modal-chart.component';
 
 
 
@@ -41,8 +44,10 @@ import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.
     ChartComponent,
     ProjectsComponent,
     ModalComponent,
-    ModalCropperComponent
+    ModalCropperComponent,
+    ModalChartComponent
   ],
+
   imports: [
     FormsModule,
     BrowserModule,
@@ -50,9 +55,14 @@ import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.
     NgChartsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({name: 'Estado'}),
-    EffectsModule.forRoot([LoadEffects])
+    EffectsModule.forRoot([LoadEffects]),
+    AngularCropperjsModule
   ],
-  providers: [],
+
+  providers: [
+    DB,
+
+  ],
   bootstrap: [AppComponent]
 })
 

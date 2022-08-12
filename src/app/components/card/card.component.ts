@@ -20,7 +20,18 @@ import { CardData } from '../../models/models';
           {{values?.description}}
         </p>
 
-        <button class="btn btn-success rounded-circle position-absolute top-0 start-100" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6"></i></button>
+        <button class="btn btn-success rounded-circle position-absolute top-0 start-100" *ngIf="(edit$ | async)" (click)="modal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
+        <app-modal title="Editar" #modal>
+          <div class="mb-3">
+            <input type="file" class="form-control" name="img" accept="image/*" placeholder="Imagen">
+          </div>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="title" placeholder="Titulo" value="{{values?.title}}">
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="3" name="description" placeholder="Descripcion" value="{{values?.description}}"></textarea>
+          </div>
+        </app-modal>
       </div>
     </div>
   `,

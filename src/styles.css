@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*! Establecer el tamaĆ±o de los Croppers de la Pagina */
+.cropper img {
+    max-height: 400px !important;
+}
+
+/*! Hacer el circle cropper para recortar photos de perfil*/
+.circle-cropper .cropper-view-box {
+	border-radius: 50%;
+}
+.circle-cropper .cropper-face {
+	background-color:inherit !important;
+}

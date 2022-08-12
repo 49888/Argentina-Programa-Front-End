@@ -18,11 +18,7 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
         
         <button class="btn btn-success rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6" (click)="mBannerImage.showModal()"></i></button>
         <!--Update Banner Image-->
-        <app-modal [title]=" 'Cambiar Foto de Banner' " #mBannerImage>
-          <div class="mb-3">
-            <input type="file" class="form-control" name="bannerImg" accept="image/*">
-          </div>
-        </app-modal>
+        <app-modal-cropper title="Cambiar imagen del Banner" #mBannerImage></app-modal-cropper>
       </div>
       
       <div class="container-fluid p-2">
@@ -37,11 +33,7 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
 
                 <button class="btn btn-success rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)" (click)="mPerfilImage.showModal()"><i class="bi bi-pencil fs-6"></i></button>
                 <!--Update Image-->
-                <app-modal [title]=" 'Cambiar Foto de Perfil' " #mPerfilImage>
-                  <div class="mb-3">
-                    <input type="file" class="form-control" name="perfilImg" accept="image/*">
-                  </div>
-                </app-modal>
+                <app-modal-cropper title="Cambiar foto de perfil" type="circle" #mPerfilImage></app-modal-cropper>
               </div>
             </div>
             
