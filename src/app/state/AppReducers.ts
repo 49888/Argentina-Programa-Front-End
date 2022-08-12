@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Data, DataState } from "../models/models";
-import { load, loaded } from "./actions";
+import { edit, load, loaded } from "./AppActions";
 
 const initialState:DataState = {
     loading: false,
@@ -13,10 +13,22 @@ const loadingReducer = createReducer(initialState,
 
         return {...state, loading: true }
     }),
-    on(loaded, (state, data) => {
+    on(loaded, (state, {data}) => {
+
+        console.log(data);
 
         return {...state, data: data, loading: false}
     })
 );
 
-export {loadingReducer}
+
+
+const EditReducer = createReducer(true, 
+    on(edit, (state) => {
+
+        return !state;
+    })    
+);
+
+export {loadingReducer, EditReducer}
+

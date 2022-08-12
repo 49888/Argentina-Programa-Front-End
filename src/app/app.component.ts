@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 
   template: `
   
-    <app-header [user]="user"></app-header>
+    <app-header></app-header>
 
     <router-outlet></router-outlet>
   `,

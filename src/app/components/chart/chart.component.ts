@@ -1,6 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { ChartConfiguration, ChartData, ChartEvent, ChartOptions, ChartType, Chart } from 'chart.js';
+import { Observable } from 'rxjs';
+import { selectEditState } from 'src/app/state/AppSelectors';
 
 import { Skill } from '../../models/models';
 
@@ -8,7 +11,7 @@ import { Skill } from '../../models/models';
 @Component({
   selector: 'app-chart',
   template: `
-    <div>
+    <div class="position-relative">
       <h6 class="text-center">{{value?.title}}</h6>
 
       <div class="chart mx-auto">
@@ -17,6 +20,8 @@ import { Skill } from '../../models/models';
       </div>
 
       <h6 class="text-center">{{value?.percentage}}%</h6>
+
+      <button class="btn btn-success rounded-circle position-absolute top-0 start-100 translate-middle-x" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6"></i></button>
     </div>
   `,
   styles: [
@@ -44,6 +49,7 @@ export class ChartComponent implements OnInit, OnChanges {
   
   @Input() value:Skill | null = null;
 
+  protected edit$:Observable<boolean> = new Observable();
 
   public ChartData: ChartData<'doughnut'> | undefined;
 
@@ -83,16 +89,12 @@ export class ChartComponent implements OnInit, OnChanges {
   //*/
 
 
-  constructor() {
-    console.log(this.value);
-
-    
-
-    
-  }
+  constructor(private store:Store<any>){}
   
 
   ngOnInit(): void {
+
+    this.edit$ = this.store.select(selectEditState);
 
     //let canvas = <HTMLCanvasElement> document.getElementById(this.id);
     

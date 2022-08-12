@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectEditState } from 'src/app/state/AppSelectors';
 import { CardData } from '../../models/models';
 
 
@@ -6,7 +9,7 @@ import { CardData } from '../../models/models';
   selector: 'app-card',
 
   template: `
-    <div class="row p-2">
+    <div class="row p-2 m-2 position-relative">
       <div class="col-3 Logo">
         <img *ngIf="values?.img" [src]="values?.img" alt="logo">
       </div>
@@ -16,6 +19,8 @@ import { CardData } from '../../models/models';
         <p>
           {{values?.description}}
         </p>
+
+        <button class="btn btn-success rounded-circle position-absolute top-0 start-100" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6"></i></button>
       </div>
     </div>
   `,
@@ -38,9 +43,13 @@ export class CardComponent implements OnInit {
 
   @Input() values:CardData | null = null;
 
-  constructor() { }
+  protected edit$:Observable<boolean> = new Observable();
+
+  constructor(private store:Store<any>){}
 
   ngOnInit(): void {
+
+    this.edit$ = this.store.select(selectEditState);
   }
 
 }

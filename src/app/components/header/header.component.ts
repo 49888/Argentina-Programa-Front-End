@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { edit } from 'src/app/state/AppActions';
+import { selectEditState } from 'src/app/state/AppSelectors';
 
 @Component({
   selector: 'app-header',
@@ -22,9 +26,9 @@ import { Component, Input, OnInit } from '@angular/core';
               </li>
             </ul>
 
-            <a class="btn btn-success my-0 mx-2" *ngIf="user == null" routerLink="/login">Login</a>
+            <a class="btn btn-success my-0 mx-2" *ngIf="!(edit$ | async)" routerLink="/login">Login</a>
 
-            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="user != null">Salir</button>
+            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="true" (click)="this.enableEdit()">Salir</button>
           </div>
         </div>
       </nav>
@@ -43,11 +47,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() user:object | null = null;
+  protected edit$:Observable<boolean> = new Observable();
 
-  constructor() { }
+  constructor(private store:Store<any>){}
 
   ngOnInit(): void {
+
+    this.edit$ = this.store.select(selectEditState);
+  }
+
+  enableEdit(){
+
+    console.log("Edit mode");
+
+    this.store.dispatch(edit());
   }
 
 }

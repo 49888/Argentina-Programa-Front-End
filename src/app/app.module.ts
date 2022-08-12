@@ -17,7 +17,12 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { NgChartsModule } from 'ng2-charts';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ROOT_REDUCERS } from './state/state';
+import { ROOT_REDUCERS } from './state/AppState';
+import { EffectsModule } from '@ngrx/effects';
+import { LoadEffects } from './state/AppEffects';
+import { ModalComponent } from './components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.component';
 
 
 
@@ -34,14 +39,18 @@ import { ROOT_REDUCERS } from './state/state';
     MainComponent,
     SkillsComponent,
     ChartComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    ModalComponent,
+    ModalCropperComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     NgChartsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
-    StoreDevtoolsModule.instrument({name: 'Estado'})
+    StoreDevtoolsModule.instrument({name: 'Estado'}),
+    EffectsModule.forRoot([LoadEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

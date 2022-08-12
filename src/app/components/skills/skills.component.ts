@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Chart } from 'chart.js';
+import { Observable } from 'rxjs';
+import { selectDataSkills, selectEditState } from 'src/app/state/AppSelectors';
 import { Skill } from '../../models/models';
 
 
@@ -13,7 +16,7 @@ import { Skill } from '../../models/models';
         
         <div class="row">
 
-          <app-chart *ngFor="let item of data; index as i;" [value]="item" class="col"></app-chart>
+          <app-chart *ngFor="let item of (skills$ | async); index as i;" [value]="item" class="col"></app-chart>
 
         </div>
 
@@ -30,17 +33,22 @@ import { Skill } from '../../models/models';
 })
 export class SkillsComponent implements OnInit {
 
-  @Input() data:Skill[] | undefined = undefined;
+  protected edit$:Observable<boolean> = new Observable();
+
+  protected skills$:Observable<Skill[] | undefined> = new Observable();
 
 
-  constructor() {
+  constructor(private store:Store<any>){
+
     Chart.overrides.doughnut.cutout = 50;
-
-    console.log(this.data);
   }
 
-  ngOnInit(): void {
-    console.log(this.data);
+  ngOnInit():void {
+
+    this.skills$ = this.store.select(selectDataSkills);
+
+    this.edit$ = this.store.select(selectEditState);
+
   }
 
 }

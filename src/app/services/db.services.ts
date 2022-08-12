@@ -20,7 +20,7 @@ export class DB {
             name: 'Franco Javier Gadea',
             bannerImg: 'assets/image/banner.jpg',
             perfilImg: 'assets/image/perfil.png',
-            info: 'lorem',
+            info: 'La producción de "Komi-san wa, Komyushou Desu" abrió una campaña especial para el Blu-ray BOX de la primera temporada. Si se superan 300 reservaciones, el paquete será lanzado y si, por ejemplo, se superan 2,000, se añadirán las medias de Komi como beneficio',
             title: 'Desarrollador Full Stack'
         },
 
@@ -29,7 +29,17 @@ export class DB {
             title: 'Repartidor de Rappi',
             description: 'Fui repartidor durante el año 2022',
             img: 'assets/image/rappi.webp'
-            }
+            },
+            {
+              title: 'Repartidor de Rappi',
+              description: 'Fui repartidor durante el año 2022',
+              img: 'assets/image/rappi.webp'
+              },
+              {
+                title: 'Repartidor de Rappi',
+                description: 'Fui repartidor durante el año 2022',
+                img: 'assets/image/rappi.webp'
+                }
         ],
 
         education: [

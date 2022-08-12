@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectDataEducation, selectEditState } from 'src/app/state/AppSelectors';
 import { CardData } from '../../models/models';
 
 
@@ -11,9 +14,8 @@ import { CardData } from '../../models/models';
       <h4 class="border-bottom border-light p-2">Educacion</h4>
       <div class="container-fluid">
         
-          <app-card *ngFor="let item of data; index as i;" [values]="item"></app-card>
+        <app-card *ngFor="let item of (education$ | async); index as i;" [values]="item"></app-card>
           
-
       </div>
     </div>
   `,
@@ -22,11 +24,17 @@ import { CardData } from '../../models/models';
 })
 export class EducationComponent implements OnInit {
 
-  @Input() data:CardData[] | undefined = undefined;
+  protected edit$:Observable<boolean> = new Observable();
 
-  constructor() { }
+  protected education$:Observable<CardData[] | undefined> = new Observable();
+
+  constructor(private store:Store<any>) { }
 
   ngOnInit(): void {
+
+    this.education$ = this.store.select(selectDataEducation);
+
+    this.edit$ = this.store.select(selectEditState);
   }
 
 }
