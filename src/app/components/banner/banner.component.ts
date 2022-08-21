@@ -43,7 +43,7 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
               
               <button class="btn btn-success rounded-circle position-absolute top-0 start-100 translate-middle" *ngIf="(edit$ | async)" (click)="mName.showModal()"><i class="bi bi-pencil fs-6"></i></button>  
               <!--Update Name-->
-              <app-modal [title]=" 'Cambiar Nombre' " #mName>
+              <app-modal [title]=" 'Cambiar Nombre' " [table]="'banner'" #mName>
                 <div class="mb-3">
                   <input type="text" class="form-control" name="name" placeholder="nombre" [value]="(banner$ | async)?.name">
                 </div>
@@ -54,16 +54,16 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
           <!--Title and info-->
           <div class="col p-2 m-2 position-relative">
             <h3>{{ (banner$ | async)?.title}} </h3>
-            <p class="m-0">{{ (banner$ | async)?.info }}</p>
+            <p class="m-0">{{ (banner$ | async)?.information }}</p>
 
             <button class="btn btn-success rounded-circle position-absolute top-0 end-0" *ngIf="(edit$ | async)" (click)="mTitle.showModal()"><i class="bi bi-pencil fs-6"></i></button>
             <!--Update Title and info-->
-            <app-modal [title]=" 'Cambiar Titulo o Info' " #mTitle>
+            <app-modal [title]=" 'Cambiar Titulo o Info' " [table]="'banner'" #mTitle>
               <div class="mb-3">
                 <input type="text" class="form-control" name="title" placeholder="Titulo" [value]="(banner$ | async)?.title">
               </div>
               <div class="mb-3">
-                <textarea class="form-control" rows="7" name="info" placeholder="Info" [value]="(banner$ | async)?.info"></textarea>
+                <textarea class="form-control" rows="7" name="information" placeholder="Info" [value]="(banner$ | async)?.information"></textarea>
               </div>
             </app-modal>
 

@@ -20,18 +20,29 @@ import { CardData } from '../../models/models';
           {{values?.description}}
         </p>
 
-        <button class="btn btn-success rounded-circle position-absolute top-0 start-100" *ngIf="(edit$ | async)" (click)="modal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
-        <app-modal title="Editar" #modal>
-          <div class="mb-3">
-            <input type="file" class="form-control" name="img" accept="image/*" placeholder="Imagen">
-          </div>
+        <div class="position-absolute top-0 start-100">
+          <!--Update button-->
+          <button class="btn btn-success rounded-circle" *ngIf="(edit$ | async)" (click)="updateModal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
+        
+          <!-- Delete Button -->
+          <button class="btn btn-danger rounded-circle my-1" *ngIf="(edit$ | async)" (click)="deleteModal.showModal()"><i class="bi bi-trash"></i></button>
+        </div>
+        
+        <!-- Update Modal -->
+        <app-modal title="Editar" [title]="'Editar'" [table]="list" #updateModal>
           <div class="mb-3">
             <input type="text" class="form-control" name="title" placeholder="Titulo" value="{{values?.title}}">
           </div>
           <div class="mb-3">
             <textarea class="form-control" rows="3" name="description" placeholder="Descripcion" value="{{values?.description}}"></textarea>
           </div>
+          <input type="number" value="{{values?.id}}" name="id" style="display: none;">
         </app-modal>
+
+        <!-- Delete Modal -->
+        <app-modal-delete title="Eliminar" [table]="list" #deleteModal>
+          <input type="number" name="id"  [value]="values?.id" style="display: none;">
+        </app-modal-delete>
       </div>
     </div>
   `,
@@ -53,6 +64,8 @@ import { CardData } from '../../models/models';
 export class CardComponent implements OnInit {
 
   @Input() values:CardData | null = null;
+
+  @Input() list:string = '';
 
   protected edit$:Observable<boolean> = new Observable();
 

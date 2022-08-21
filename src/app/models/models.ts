@@ -1,23 +1,26 @@
 
 
 interface Banner {
-    name:string,
-    bannerImg:string | undefined,
-    perfilImg:string | undefined,
-    info:string,
-    title:string
+    id:number,
+    name:string | null,
+    bannerImg:string | null,
+    perfilImg:string | null,
+    information:string | null,
+    title:string | null
 }
 
 interface Skill {
-    title:string
-    percentage:number
-    img:string | undefined
+    id:number
+    title:string | null
+    percentage:number | null 
+    img:string | null
 }
 
 interface CardData {
-    title:string
-    description:string
-    img:string | undefined
+    id:number
+    title:string | null
+    description:string | null
+    img:string | null
 }
 
 
@@ -33,4 +36,15 @@ interface DataState {
     data:Data | null
 }
 
-export {Skill, CardData, Banner, Data, DataState}
+interface UpdateData {
+    id:number,
+    table:string,
+    data:any
+}
+
+interface DeleteData {
+    id:number,
+    table:string
+}
+
+export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData}

@@ -21,7 +21,30 @@ import { Skill } from '../../models/models';
 
       <h6 class="text-center">{{value?.percentage}}%</h6>
 
-      <button class="btn btn-success rounded-circle position-absolute top-0 start-100 translate-middle-x" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6"></i></button>
+      <div class="position-absolute top-0 start-100 translate-middle-x">
+        <!-- Update Button -->
+        <button class="btn btn-success rounded-circle my-1" *ngIf="(edit$ | async)" (click)="updateModal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
+        
+        <!-- Delete Button -->
+        <button class="btn btn-danger rounded-circle my-1" *ngIf="(edit$ | async)" (click)="deleteModal.showModal()"><i class="bi bi-trash"></i></button>
+      </div>
+      
+      <!-- Update Modal -->
+      <app-modal-chart [title]="'Editar'" [table]="'skills'" #updateModal>
+        <div class="mb-3">
+          <input type="text" class="form-control" name="title" [value]="value?.title">
+        </div>
+        <app-chart-input (emiter)="getChartInputValue($event)" [value]="(percentage)"></app-chart-input>
+        <div class="mb-3">
+          <input type="number" class="form-control" name="percentage" [value]="percentage" (change)="percentageInputChange($event)" min="0" max="100">
+        </div>
+        <input type="number" name="id"  [value]="value?.id" style="display: none;">
+      </app-modal-chart>
+     
+      <!-- Delete Modal -->
+      <app-modal-delete title="Eliminar" table="skills" #deleteModal>
+        <input type="number" name="id"  [value]="value?.id" style="display: none;">
+      </app-modal-delete>
     </div>
   `,
   styles: [
@@ -44,10 +67,13 @@ import { Skill } from '../../models/models';
     `
   ]
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class ChartComponent implements OnInit {
 
   
   @Input() value:Skill | null = null;
+
+  protected percentage:number = 50;
+
 
   protected edit$:Observable<boolean> = new Observable();
 
@@ -75,19 +101,7 @@ export class ChartComponent implements OnInit, OnChanges {
         backgroundColor: ['rgb(255, 99, 0)','rgb(100, 100, 100)']
       }
     }
-
   }
-
-  /*// events
-  public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-  //*/
-
 
   constructor(private store:Store<any>){}
   
@@ -96,17 +110,30 @@ export class ChartComponent implements OnInit, OnChanges {
 
     this.edit$ = this.store.select(selectEditState);
 
-    //let canvas = <HTMLCanvasElement> document.getElementById(this.id);
+    if(this.value) this.percentage = this.value.percentage as number;
     
-    this.ChartData = {
+    if(this.value){
+
+      let {percentage} = this.value;
+
+      this.ChartData = {
     
-      datasets: [{ 
-        data: [this.value!.percentage, 100 - this.value!.percentage]
-      }],
-    };
+        datasets: [{ 
+          data: [(percentage ? percentage : 0), 100 - (percentage ? percentage : 0)]
+        }],
+      };
+    }
+
+
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    
+  getChartInputValue(e:any){
+
+    this.percentage = e as number;
+  }
+
+  percentageInputChange(e:any){
+
+    this.percentage = e.target.value;
   }
 }

@@ -67,6 +67,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+
+          "options": {
+            "browserTarget": "your-application-name:build",
+            "proxyConfig": "proxy.conf.json"
+          },
+
           "configurations": {
             "production": {
               "browserTarget": "Argentina_Programa_Proyecto:build:production"

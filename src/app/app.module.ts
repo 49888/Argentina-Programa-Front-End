@@ -19,14 +19,16 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './state/AppState';
 import { EffectsModule } from '@ngrx/effects';
-import { LoadEffects } from './state/AppEffects';
+import { DeleteEffects, LoadEffects, UpdateEffects } from './state/AppEffects';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.component';
 import { DB } from './services/db.service';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { ModalChartComponent } from './components/modal-chart/modal-chart.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ChartInputComponent } from './components/chart-input/chart-input.component';
+import { ModalDeleteComponent } from './components/modal-delete/modal-delete.component';
 
 
 
@@ -45,7 +47,9 @@ import { ModalChartComponent } from './components/modal-chart/modal-chart.compon
     ProjectsComponent,
     ModalComponent,
     ModalCropperComponent,
-    ModalChartComponent
+    ModalChartComponent,
+    ChartInputComponent,
+    ModalDeleteComponent
   ],
 
   imports: [
@@ -55,8 +59,9 @@ import { ModalChartComponent } from './components/modal-chart/modal-chart.compon
     NgChartsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({name: 'Estado'}),
-    EffectsModule.forRoot([LoadEffects]),
-    AngularCropperjsModule
+    EffectsModule.forRoot([LoadEffects, UpdateEffects, DeleteEffects]),
+    AngularCropperjsModule,
+    HttpClientModule
   ],
 
   providers: [
