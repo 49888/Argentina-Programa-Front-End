@@ -11,40 +11,49 @@ import { Skill } from '../../models/models';
 @Component({
   selector: 'app-chart',
   template: `
-    <div class="position-relative">
-      <h6 class="text-center">{{value?.title}}</h6>
-
-      <div class="chart mx-auto">
-        <canvas baseChart [data]="ChartData" [type]="Type" [options]="ChartOptions"></canvas>
-        <img [src]="value?.img" alt="">
-      </div>
-
-      <h6 class="text-center">{{value?.percentage}}%</h6>
-
-      <div class="position-absolute top-0 start-100 translate-middle-x">
-        <!-- Update Button -->
-        <button class="btn btn-success rounded-circle my-1" *ngIf="(edit$ | async)" (click)="updateModal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
-        
-        <!-- Delete Button -->
-        <button class="btn btn-danger rounded-circle my-1" *ngIf="(edit$ | async)" (click)="deleteModal.showModal()"><i class="bi bi-trash"></i></button>
-      </div>
+    <div>
       
-      <!-- Update Modal -->
-      <app-modal-chart [title]="'Editar'" [table]="'skills'" #updateModal>
-        <div class="mb-3">
-          <input type="text" class="form-control" name="title" [value]="value?.title">
+      <div class="mx-auto p-2 position-relative" style="width: fit-content;">
+        
+        <h6 class="text-center">{{value?.title}}</h6>
+
+        <div class="chart">
+          <canvas baseChart [data]="ChartData" [type]="Type" [options]="ChartOptions"></canvas>
+          <img [src]="value?.img" alt="" class="position-absolute top-50 start-50 translate-middle">
+  
+          <!--Update Image-->
+          <button class="btn btn-primary rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)" (click)="modalImage.showModal()"><i class="bi bi-upload"></i></button>
+          <app-modal-cropper title="Cambiar imagen" type="none" [table]="'skills'" [imageId]="value!.id" #modalImage></app-modal-cropper>
         </div>
-        <app-chart-input (emiter)="getChartInputValue($event)" [value]="(percentage)"></app-chart-input>
-        <div class="mb-3">
-          <input type="number" class="form-control" name="percentage" [value]="percentage" (change)="percentageInputChange($event)" min="0" max="100">
+  
+        <h6 class="text-center">{{value?.percentage}}%</h6>
+  
+        <div class="position-absolute top-0 start-100 translate-middle-x">
+          <!-- Update Button -->
+          <button class="btn btn-success rounded-circle my-1" *ngIf="(edit$ | async)" (click)="updateModal.showModal()"><i class="bi bi-pencil fs-6"></i></button>
+          
+          <!-- Delete Button -->
+          <button class="btn btn-danger rounded-circle my-1" *ngIf="(edit$ | async)" (click)="deleteModal.showModal()"><i class="bi bi-trash"></i></button>
         </div>
-        <input type="number" name="id"  [value]="value?.id" style="display: none;">
-      </app-modal-chart>
-     
-      <!-- Delete Modal -->
-      <app-modal-delete title="Eliminar" table="skills" #deleteModal>
-        <input type="number" name="id"  [value]="value?.id" style="display: none;">
-      </app-modal-delete>
+        
+        <!-- Update Modal -->
+        <app-modal-chart [title]="'Editar'" [table]="'skills'" #updateModal>
+          <div class="mb-3">
+            <input type="text" class="form-control" name="title" [value]="value?.title" placeholder="Titulo">
+          </div>
+          <app-chart-input (emiter)="getChartInputValue($event)" [value]="(percentage)"></app-chart-input>
+          <div class="mb-3">
+            <input type="number" class="form-control" name="percentage" [value]="percentage" (change)="percentageInputChange($event)" min="0" max="100" placeholder="Porcentaje">
+          </div>
+          <input type="number" name="id"  [value]="value?.id" style="display: none;">
+        </app-modal-chart>
+       
+        <!-- Delete Modal -->
+        <app-modal-delete title="Eliminar" table="skills" #deleteModal>
+          <input type="number" name="id"  [value]="value?.id" style="display: none;">
+        </app-modal-delete>
+
+      </div>
     </div>
   `,
   styles: [
@@ -57,12 +66,7 @@ import { Skill } from '../../models/models';
         width: 50px; height: 50px;
         object-fit: scale-down;
         display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        margin: auto;
+
       }
     `
   ]

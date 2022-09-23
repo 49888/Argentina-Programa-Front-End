@@ -12,85 +12,36 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
   template: `
     <div class="bg-light text-dark rounded">
 
-      <!--Banner-->  
-      <div class="banner position-relative">
-        <img [src]="(banner$ | async)?.bannerImg" alt="banner">
-        
-        <button class="btn btn-success rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)"><i class="bi bi-pencil fs-6" (click)="mBannerImage.showModal()"></i></button>
-        <!--Update Banner Image-->
-        <app-modal-cropper title="Cambiar imagen del Banner" #mBannerImage></app-modal-cropper>
-      </div>
+      <!--Banner Image-->
+      <app-banner-image [image]="(banner$ | async)?.bannerImg"></app-banner-image>
       
       <div class="container-fluid p-2">
 
         <div class="row align-items-end">
 
-          <!--Perfil image and name-->
-          <div class="col-4 p-2 m-2 position-relative" style="top: -50px">
-            <div>
-              <div class="perfil mx-auto position-relative">
-                <img [src]="(banner$ | async)?.perfilImg" alt="perfil">
-
-                <button class="btn btn-success rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)" (click)="mPerfilImage.showModal()"><i class="bi bi-pencil fs-6"></i></button>
-                <!--Update Image-->
-                <app-modal-cropper title="Cambiar foto de perfil" type="circle" #mPerfilImage></app-modal-cropper>
-              </div>
-            </div>
+          <div class="col-5 p-2 m-2">
             
-            <div class="text-center position-relative">
-              <h5>{{ (banner$ | async)?.name }}</h5>
+            <!--Banner Perfil-->
+            <app-banner-perfil [image]="(banner$ | async)?.perfilImg" [name]="(banner$ | async)?.name"></app-banner-perfil>
 
-              
-              <button class="btn btn-success rounded-circle position-absolute top-0 start-100 translate-middle" *ngIf="(edit$ | async)" (click)="mName.showModal()"><i class="bi bi-pencil fs-6"></i></button>  
-              <!--Update Name-->
-              <app-modal [title]=" 'Cambiar Nombre' " [table]="'banner'" #mName>
-                <div class="mb-3">
-                  <input type="text" class="form-control" name="name" placeholder="nombre" [value]="(banner$ | async)?.name">
-                </div>
-              </app-modal>
-            </div>
+            <!--Banner Redes-->
+            <app-banner-redes></app-banner-redes>
+
           </div>
 
-          <!--Title and info-->
           <div class="col p-2 m-2 position-relative">
-            <h3>{{ (banner$ | async)?.title}} </h3>
-            <p class="m-0">{{ (banner$ | async)?.information }}</p>
 
-            <button class="btn btn-success rounded-circle position-absolute top-0 end-0" *ngIf="(edit$ | async)" (click)="mTitle.showModal()"><i class="bi bi-pencil fs-6"></i></button>
-            <!--Update Title and info-->
-            <app-modal [title]=" 'Cambiar Titulo o Info' " [table]="'banner'" #mTitle>
-              <div class="mb-3">
-                <input type="text" class="form-control" name="title" placeholder="Titulo" [value]="(banner$ | async)?.title">
-              </div>
-              <div class="mb-3">
-                <textarea class="form-control" rows="7" name="information" placeholder="Info" [value]="(banner$ | async)?.information"></textarea>
-              </div>
-            </app-modal>
-
+            <!--Banner Title and Info-->
+            <app-banner-title-info [title]="(banner$ | async)?.title" [info]="(banner$ | async)?.information"></app-banner-title-info>
+          
           </div>
+
         </div>
       </div>
     </div>
   `,
 
-  styles: [
-    `
-      img {
-        width: 100%;  height: 100%;
-        object-fit: cover;
-      }
-      .banner {
-        width: 100%;
-        height: 250px;
-      }
-      .perfil {
-        width: 150px;
-        height: 150px;
-        overflow: hidden;
-        border-radius: 50%;
-      }
-    `
-  ]
+  styles: [``]
 })
 export class BannerComponent implements OnInit {
 

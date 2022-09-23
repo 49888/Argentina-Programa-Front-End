@@ -10,7 +10,9 @@ import { load } from '../../state/AppActions';
   selector: 'app-main',
 
   template: `
+
     <h4>Loading: {{loading$ | async | json}} Edit mode: {{edit$ | async | json}}</h4>
+    
     <main class="container-fluid bg-dark text-light" *ngIf="!(loading$ | async)">
 
       <div class="row">

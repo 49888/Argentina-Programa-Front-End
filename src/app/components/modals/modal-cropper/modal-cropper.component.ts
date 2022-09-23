@@ -1,16 +1,19 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { CropperComponent } from 'angular-cropperjs';
+import { ImageDataUpload } from 'src/app/models/models';
 import { Base64Service } from 'src/app/services/base64.service';
+import { updateImageAction } from 'src/app/state/AppActions';
 
 @Component({
   selector: 'app-modal-cropper',
   template: `
     <ng-container *ngIf="show">
-
+      
       <div class="Modal" (mousedown)="closeWithClick($event)" #modalBack>
         <div class="Modal-content rounded bg-light p-2 w-75">
           
-          <div>
+          <div class="text-dark">
             <h3>{{title}}</h3>
           </div>
 
@@ -20,12 +23,16 @@ import { Base64Service } from 'src/app/services/base64.service';
               <input type="file" class="form-control" name="image" accept="image/*">
             </div>
 
-            <button type="submit" class="btn btn-success">Cargar imagen</button>
+            <button type="submit" class="btn btn-success mx-1">Cargar imagen</button>
+
+            <button type="button" class="btn btn-danger mx-1" (click)="hideModal()">Cancel</button>
           </form>
 
           <div *ngIf="imageCropper && showCropper">
             <angular-cropper [cropperOptions]="config" [imageUrl]="imageCropper" #cropper class="{{type === 'circle' ? 'circle-cropper' : ''}}"></angular-cropper>
-            <button class="btn btn-primary m-2" (click)="cortar()">Cortar</button>
+            <button class="btn btn-primary m-1" (click)="cortar()">Cortar</button>
+
+            <button type="button" class="btn btn-danger m-1" (click)="hideModal()">Cancel</button>
           </div>
 
           <div class="img" *ngIf="imageURL" class="{{type === 'circle' ? 'circle-img' : ''}}">
@@ -33,7 +40,9 @@ import { Base64Service } from 'src/app/services/base64.service';
           </div>
 
           <div *ngIf="imageBlob">
-            <button class="btn btn-success m-2" (click)="subirImagen()">Cambiar Imagen</button>
+            <button class="btn btn-success m-1" (click)="subirImagen()">Cambiar Imagen</button>
+
+            <button type="button" class="btn btn-danger m-1" (click)="hideModal()">Cancel</button>
           </div>
         </div>
       </div>
@@ -71,8 +80,8 @@ import { Base64Service } from 'src/app/services/base64.service';
       }
       .circle-img img {
         border-radius: 50%;
-        border: 1px solid #ff2;
-        box-shadow: 3px 3px 19px 4px #ff2;
+        border: 1px solid lightgray;
+        box-shadow: 3px 3px 19px 4px lightgray;
       }
     `
   ]
@@ -88,6 +97,14 @@ export class ModalCropperComponent implements OnInit {
   @ViewChild('modalBack') modalBack:ElementRef | null = null; 
 
 
+  //
+  @Input() table:string | null = null;
+
+  @Input() imageId:number | null = null;
+
+  @Input() to:string | null = null;
+ 
+
   //Image
     protected imageName:string | null = null;
 
@@ -100,7 +117,7 @@ export class ModalCropperComponent implements OnInit {
     protected config:any = {
       guides: false,
       center: false,
-      aspectRatio: 16/9
+      aspectRatio: NaN
     }
 
     @ViewChild('cropper') cropper:CropperComponent | null = null; 
@@ -110,11 +127,28 @@ export class ModalCropperComponent implements OnInit {
     protected showCropper:boolean = false;
   //*/
 
-  constructor(private read:Base64Service){}
+  constructor(private read:Base64Service, private store:Store){}
 
   ngOnInit(): void {
 
-    this.config.aspectRatio = this.type === 'circle' ? 1 : 16/9;
+    switch(true){
+
+      case this.type === 'circle':
+        this.config.aspectRatio = 1;
+        break;
+
+      case this.type === 'square':
+        this.config.aspectRatio = 1;
+        break; 
+
+      case this.type === 'rectangle':
+        this.config.aspectRatio = 16/9;
+        break;
+        
+      case this.type === 'none':
+        this.config.aspectRatio = NaN;
+        break;  
+    }
   }
 
   showModal(){
@@ -165,7 +199,7 @@ export class ModalCropperComponent implements OnInit {
     //Obtener la imagen recortada en base64 para previsualizar
     this.imageURL = this.cropper?.cropper.getCroppedCanvas({}).toDataURL() as string;
 
-    console.log('url:', this.imageURL);
+    //console.log('url:', this.imageURL);
 
     //Obtener la imagen recortada como Blob para subir al servidor
     this.cropper?.cropper.getCroppedCanvas({width: 300, height: 300}).toBlob((blob) => {
@@ -180,5 +214,36 @@ export class ModalCropperComponent implements OnInit {
   protected subirImagen(){
 
     console.log('subiendo...');
+
+    if(this.imageBlob && this.imageName){
+
+      let formdata:FormData = new FormData();
+
+      formdata.append('file', new File([this.imageBlob], this.imageName))
+
+
+      const aux:ImageDataUpload = {
+        table: this.table as string,
+        data: formdata      
+      }
+
+      if(this.imageId){
+
+
+        aux.id = this.imageId;
+
+        aux.data.append('id', this.imageId.toString());
+      } 
+
+      if(this.to){
+        aux.to = this.to;
+
+        aux.data.append('to', this.to);
+      } 
+
+      
+
+      this.store.dispatch(updateImageAction({imageDataUpload: aux}));
+    }
   }
 }

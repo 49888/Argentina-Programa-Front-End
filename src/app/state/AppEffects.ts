@@ -3,9 +3,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, exhaustMap } from 'rxjs/operators';
 import { DB } from '../services/db.service';
-import { deleteAction, deletedAction, update, updated } from './AppActions';
+import { create, created, deleteAction, deletedAction, update, updated, updatedImageAction, updateImageAction } from './AppActions';
 
- 
+
+//!--> Load data
 @Injectable()
 class LoadEffects {
 
@@ -31,7 +32,7 @@ class LoadEffects {
     });
 }
 
-
+//!--> Update data
 @Injectable()
 class UpdateEffects {
 
@@ -59,6 +60,7 @@ class UpdateEffects {
     }); 
 }
 
+//!--> Delete data
 @Injectable()
 class DeleteEffects {
 
@@ -85,5 +87,59 @@ class DeleteEffects {
     }); 
 }
 
-export {LoadEffects, UpdateEffects, DeleteEffects}
+//!--> Create data
+@Injectable()
+class CreateEffects {
+
+    constructor(private actions$:Actions, private db:DB){}
+
+    createData$ = createEffect(() => {
+
+        type CreateAction = ReturnType<typeof create>
+
+        const type = ofType<CreateAction>(create);
+
+        
+        const Map = exhaustMap((action) => {
+
+            const Obs = this.db.createData((action as CreateAction).createData);
+            
+            return Obs.pipe(
+                map(data => (created(data))),
+                catchError(() => EMPTY)
+            )
+        });
+        
+        return this.actions$.pipe(type, Map);
+    }); 
+}
+
+//!--> Update images
+@Injectable()
+class UpdateImageEffects {
+
+    constructor(private actions$:Actions, private db:DB){}
+
+    updateImage$ = createEffect(() => {
+
+        type UpdateImageAction = ReturnType<typeof updateImageAction>
+
+        const type = ofType<UpdateImageAction>(updateImageAction);
+
+        
+        const Map = exhaustMap((action) => {
+
+            const Obs = this.db.updateImage((action as UpdateImageAction).imageDataUpload);
+            
+            return Obs.pipe(
+                map(data => (updatedImageAction(data))),
+                catchError(() => EMPTY)
+            )
+        });
+        
+        return this.actions$.pipe(type, Map);
+    }); 
+}
+
+export {LoadEffects, UpdateEffects, DeleteEffects, CreateEffects, UpdateImageEffects}
 

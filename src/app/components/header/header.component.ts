@@ -17,7 +17,7 @@ import { selectEditState } from 'src/app/state/AppSelectors';
           </a>
 
           <div class="d-flex align-items-center">
-            <ul class="d-flex my-0 mx-2">
+            <ul class="Redes d-flex my-0 mx-2" style="list-style: none;">
               <li>
                 <a href="mailto:murillofausto619@gmail.com?subject=Vi%20tu%20Portfolio" target="_blank" rel="noopener noreferrer"><i class="bi bi-google"></i></a>
               </li>
@@ -37,10 +37,16 @@ import { selectEditState } from 'src/app/state/AppSelectors';
 
   styles: [
     `
-      ul li a {
+      .Redes li a {
         padding: 7px;
-        font-size: 16pt;
+      }
+      .Redes .bi {
+        font-size: 25px;
         color: white;
+      }
+      .Redes .bi:hover {
+        color: #0e64e6;
+        text-shadow: 0px 0px 4px rgba(128,65,228,0.75);
       }
     `
   ]

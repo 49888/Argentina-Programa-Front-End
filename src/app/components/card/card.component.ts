@@ -10,8 +10,12 @@ import { CardData } from '../../models/models';
 
   template: `
     <div class="row p-2 m-2 position-relative">
-      <div class="col-3 Logo">
-        <img *ngIf="values?.img" [src]="values?.img" alt="logo">
+      <div class="col-3 Logo position-relative">
+        <img [src]="values?.img" alt="image">
+
+        <!--Update Image-->
+        <button class="btn btn-primary rounded-circle position-absolute top-50 start-50 translate-middle" *ngIf="(edit$ | async)" (click)="modalImage.showModal()"><i class="bi bi-upload"></i></button>
+        <app-modal-cropper title="Cambiar imagen" type="none" [table]="list" [imageId]="imageId" #modalImage></app-modal-cropper>
       </div>
       
       <div class="col-9">
@@ -66,6 +70,8 @@ export class CardComponent implements OnInit {
   @Input() values:CardData | null = null;
 
   @Input() list:string = '';
+
+  @Input() imageId:number = -1;
 
   protected edit$:Observable<boolean> = new Observable();
 

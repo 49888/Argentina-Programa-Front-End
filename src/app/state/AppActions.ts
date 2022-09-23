@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import { Data, DeleteData, UpdateData } from '../models/models';
+import { CreateData, Data, DeleteData, ImageDataUpload, UpdateData } from '../models/models';
 
 
 const load = createAction('[main] load data');
@@ -17,4 +17,14 @@ const deleteAction = createAction('[delete modal] delete item from database', pr
 
 const deletedAction = createAction('[delete modal] deleted item from database', props<{table:string, data:any}>());
 
-export {load, loaded, edit, update, updated, deleteAction, deletedAction};
+
+const create = createAction('[create modal] add item from database', props<{createData:CreateData}>());
+
+const created = createAction('[create modal] item added to database', props<{table:string, data:any}>());
+
+
+const updateImageAction = createAction('[modal crop] update image from database', props<{imageDataUpload:ImageDataUpload}>());
+
+const updatedImageAction = createAction('[modal crop] updated image from database', props<{table:string, data:any}>());
+
+export {load, loaded, edit, update, updated, deleteAction, deletedAction, create, created, updateImageAction, updatedImageAction};

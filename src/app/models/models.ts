@@ -47,4 +47,17 @@ interface DeleteData {
     table:string
 }
 
-export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData}
+interface CreateData {
+    table:string,
+    data: any
+}
+
+
+interface ImageDataUpload {
+    table:string,
+    data:FormData,
+    id?:number
+    to?:string //banner or perfil
+}
+
+export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData, ImageDataUpload, CreateData}

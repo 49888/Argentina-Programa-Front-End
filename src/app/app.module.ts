@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+//?Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BannerComponent } from './components/banner/banner.component';
@@ -12,25 +15,31 @@ import { MainComponent } from './components/main/main.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { ChartInputComponent } from './components/chart-input/chart-input.component';
+import { BannerImageComponent } from './components/banner/banner-image.component';
+import { BannerPerfilComponent } from './components/banner/banner-perfil.component';
+import { BannerTitleInfoComponent } from './components/banner/banner-title-info.component';
+import { BannerRedesComponent } from './components/banner/banner-redes.component';
 
+//?Modals
+import { ModalComponent } from './components/modals/modal/modal.component';
+import { ModalCropperComponent } from './components/modals/modal-cropper/modal-cropper.component';
+import { ModalChartComponent } from './components/modals/modal-chart/modal-chart.component';
+import { ModalDeleteComponent } from './components/modals/modal-delete/modal-delete.component';
+import { ModalCreateComponent } from './components/modals/modal-create/modal-create.component';
+import { ModalCreateChartComponent } from './components/modals/modal-create-chart/modal-create-chart.component';
 
-import { NgChartsModule } from 'ng2-charts';
+//?NGRX
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ROOT_REDUCERS } from './state/AppState';
-import { EffectsModule } from '@ngrx/effects';
-import { DeleteEffects, LoadEffects, UpdateEffects } from './state/AppEffects';
-import { ModalComponent } from './components/modal/modal.component';
-import { FormsModule } from '@angular/forms';
-import { ModalCropperComponent } from './components/modal-cropper/modal-cropper.component';
+import { CreateEffects, DeleteEffects, LoadEffects, UpdateEffects, UpdateImageEffects } from './state/AppEffects';
+
+//?otros
 import { DB } from './services/db.service';
 import { AngularCropperjsModule } from 'angular-cropperjs';
-import { ModalChartComponent } from './components/modal-chart/modal-chart.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ChartInputComponent } from './components/chart-input/chart-input.component';
-import { ModalDeleteComponent } from './components/modal-delete/modal-delete.component';
-
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -49,7 +58,13 @@ import { ModalDeleteComponent } from './components/modal-delete/modal-delete.com
     ModalCropperComponent,
     ModalChartComponent,
     ChartInputComponent,
-    ModalDeleteComponent
+    ModalDeleteComponent,
+    ModalCreateComponent,
+    ModalCreateChartComponent,
+    BannerImageComponent,
+    BannerPerfilComponent,
+    BannerTitleInfoComponent,
+    BannerRedesComponent
   ],
 
   imports: [
@@ -59,7 +74,7 @@ import { ModalDeleteComponent } from './components/modal-delete/modal-delete.com
     NgChartsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({name: 'Estado'}),
-    EffectsModule.forRoot([LoadEffects, UpdateEffects, DeleteEffects]),
+    EffectsModule.forRoot([LoadEffects, UpdateEffects, DeleteEffects, CreateEffects, UpdateImageEffects]),
     AngularCropperjsModule,
     HttpClientModule
   ],

@@ -16,14 +16,27 @@ import { Skill } from '../../models/models';
         
         <div class="row">
 
-          <app-chart *ngFor="let item of (skills$ | async); index as i;" [value]="item" class="col"></app-chart>
+          <div class="col mx-3" *ngFor="let item of (skills$ | async); index as i;">
+
+            <app-chart  [value]="item"></app-chart>
+          </div>
 
         </div>
+ 
+        <div *ngIf="(edit$ | async)" class="position-relative" style="height: 50px;">
+          <!-- create buttom-->
+          <button class="btn btn-success position-absolute bottom-0 end-0" (click)="createModal.showModal()">Add</button>
 
-
-        <div class="row">
-
-        </div>
+          <!-- create modal -->
+          <app-modal-create-chart [title]="'Añadir'" [table]="'skills'" #createModal>
+            <div class="mb-3">
+              <input type="text" class="form-control" name="title" placeholder="Titulo">
+            </div>
+            <app-chart-input (emiter)="getChartInputValue($event)" [value]="(percentage)"></app-chart-input>
+            <div class="mb-3">
+              <input type="number" class="form-control" name="percentage" [value]="percentage" (change)="percentageInputChange($event)" min="0" max="100" placeholder="Porcentaje">
+            </div>
+          </app-modal-create-chart>
 
       </div>
     </div>
@@ -36,6 +49,9 @@ export class SkillsComponent implements OnInit {
   protected edit$:Observable<boolean> = new Observable();
 
   protected skills$:Observable<Skill[] | undefined> = new Observable();
+
+
+  protected percentage:number = 50;
 
 
   constructor(private store:Store<any>){
@@ -51,4 +67,13 @@ export class SkillsComponent implements OnInit {
 
   }
 
+  getChartInputValue(e:any){
+
+    this.percentage = e as number;
+  }
+
+  percentageInputChange(e:any){
+
+    this.percentage = e.target.value;
+  }
 }
