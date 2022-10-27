@@ -31,6 +31,11 @@ export const END_POINTS = {
     update: "api/experience/update/",
     delete: "api/experience/delete/",
     updateImage: 'api/experience/images/update' 
-  } 
+  }
+}
+
+export const login = {
+  token: '/login',
+  info: '/api/auth/info'
 }
   

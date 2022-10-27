@@ -13,7 +13,7 @@ import { CardData } from '../../models/models';
       <h4 class="border-bottom border-light p-2">Experiencia</h4>
       <div class="container-fluid">
         
-        <app-card *ngFor="let item of (experience$ | async); index as i;" [values]="item" [list]="'experience'" [imageId]="item.id"></app-card>
+        <app-card *ngFor="let item of (experience$ | async); index as i;" [values]="item"></app-card>
 
       </div>
 

@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 //?Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { BannerComponent } from './components/banner/banner.component';
 import { CardComponent } from './components/card/card.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { EducationComponent } from './components/education/education.component';
@@ -16,6 +15,12 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ChartInputComponent } from './components/chart-input/chart-input.component';
+import { ListCardComponent } from './components/list-card/list-card.component';
+import { CardImageComponent } from './components/card/card-image.component';
+import { CardTitleDescriptionComponent } from './components/card/card-title-description.component';
+
+//?Banner
+import { BannerComponent } from './components/banner/banner.component';
 import { BannerImageComponent } from './components/banner/banner-image.component';
 import { BannerPerfilComponent } from './components/banner/banner-perfil.component';
 import { BannerTitleInfoComponent } from './components/banner/banner-title-info.component';
@@ -40,6 +45,9 @@ import { CreateEffects, DeleteEffects, LoadEffects, UpdateEffects, UpdateImageEf
 import { DB } from './services/db.service';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { NgChartsModule } from 'ng2-charts';
+import { LoginBackgroundComponent } from './components/login/login-background.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoaderComponent } from './components/main/loader.component';
 
 
 @NgModule({
@@ -64,7 +72,13 @@ import { NgChartsModule } from 'ng2-charts';
     BannerImageComponent,
     BannerPerfilComponent,
     BannerTitleInfoComponent,
-    BannerRedesComponent
+    BannerRedesComponent,
+    ListCardComponent,
+    CardImageComponent,
+    CardTitleDescriptionComponent,
+    LoginBackgroundComponent,
+    LoginComponent,
+    LoaderComponent
   ],
 
   imports: [

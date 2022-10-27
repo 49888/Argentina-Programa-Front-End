@@ -21,9 +21,9 @@ export class DB {
 
   getData():Observable<any> {
 
-    //?Local data
+    /*//?Local data
       return of(data).pipe(delay(1500));
-    //*?/
+    //*/
 
     //*Data from API
       const obs$ = forkJoin({
@@ -48,7 +48,7 @@ export class DB {
 
     //*Peticion a la API
       const obs$ = forkJoin({
-        data: this.http.post(url, data),
+        data: this.http.post(url, data, {headers: this.authorization()}),
         table: of(table)
       });
 
@@ -74,7 +74,7 @@ export class DB {
 
     //*Peticion a la API
       const obs$ = forkJoin({
-        data: this.http.put(url, data),
+        data: this.http.put(url, data, {headers: this.authorization()}),
         table: of(table)
       });
 
@@ -100,7 +100,7 @@ export class DB {
 
     //*Petition a la API
       const obs$ = forkJoin({
-        data: this.http.delete(url),
+        data: this.http.delete(url, {headers: this.authorization()}),
         table: of(table)
       });
 
@@ -126,7 +126,7 @@ export class DB {
 
     //*Peticion a la API
       const obs$ = forkJoin({
-        data: this.http.post(url, data),
+        data: this.http.post(url, data, {headers: this.authorization()}),
         table: of(table)
       });
 
@@ -136,5 +136,15 @@ export class DB {
     //*/  
 
     //return of({table, data: 'OK'});
+  }
+
+
+  private authorization():HttpHeaders {
+
+    const token = localStorage.getItem('token');
+
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
   }
 }

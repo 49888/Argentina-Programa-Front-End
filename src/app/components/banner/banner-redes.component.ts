@@ -7,12 +7,18 @@ import { Component, OnInit } from '@angular/core';
         <!-- Redes -->
         <div class="Redes"> 
             <ul class="d-flex justify-content-evenly p-0" style="list-style: none;">
-            <li class="text-center">
-                <a href="mailto:murillofausto619@gmail.com?subject=Vi%20tu%20Portfolio" target="_blank" rel="noopener noreferrer"><i class="bi bi-google"></i></a>
-            </li>
-            <li class="text-center">
-                <a href="https://api.whatsapp.com/send?phone=5493816065882" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
-            </li>
+                <li class="text-center">
+                    <a href="mailto:murillofausto619@gmail.com?subject=Vi%20tu%20Portfolio" target="_blank" rel="noopener noreferrer"><i class="bi bi-google"></i></a>
+                </li>
+                <li class="text-center">
+                    <a href="https://api.whatsapp.com/send?phone=5493816065882" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+                </li>
+                <li class="text-center">
+                    <a href="https://www.linkedin.com/in/franco-javier-alvarez-301105230/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+                </li>
+                <li class="text-center">
+                    <a href="https://github.com/49888" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i></a>
+                </li>
             </ul> 
         </div>
     `,

@@ -94,7 +94,7 @@ const loadingReducer = createReducer(initialState,
 
 
 
-const EditReducer = createReducer(true, 
+const EditReducer = createReducer(false, 
     on(edit, (state) => {
 
         return !state;

@@ -11,22 +11,22 @@ import { load } from '../../state/AppActions';
 
   template: `
 
-    <h4>Loading: {{loading$ | async | json}} Edit mode: {{edit$ | async | json}}</h4>
+    <h4 class="bg-light" style="position: fixed; bottom: 0">Loading: {{loading$ | async | json}} Edit mode: {{edit$ | async | json}}</h4>
     
-    <main class="container-fluid bg-dark text-light" *ngIf="!(loading$ | async)">
+    <main class="container-fluid text-light" *ngIf="!(loading$ | async)">
 
       <div class="row">
-        <div class="col-lg-6 col-xs-12">
+        <div class="col-lg-7 col-xs-12">
           <app-banner></app-banner>
 
           <app-skills></app-skills>
         </div>
 
-        <div class="col-lg-6 col-xs-12 container-fluid">
+        <div class="col-lg-5 col-xs-12 container-fluid">
 
-          <app-experience></app-experience>
+          <app-list-card table="experience" title="Experiencia" [data]="(data$ | async)?.experience"></app-list-card>
 
-          <app-education></app-education>
+          <app-list-card table="education" title="Educacion" [data]="(data$ | async)?.education"></app-list-card>
         </div>
       </div>
 
@@ -43,9 +43,11 @@ import { load } from '../../state/AppActions';
       </div>
 
     </main>
+
+    <app-loader *ngIf="(loading$ | async)"></app-loader>
   `,
 
-  styles: []
+  styles: [``]
 })
 export class MainComponent implements OnInit {
 

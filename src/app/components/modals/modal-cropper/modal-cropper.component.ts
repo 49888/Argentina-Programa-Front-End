@@ -98,11 +98,13 @@ export class ModalCropperComponent implements OnInit {
 
 
   //
-  @Input() table:string | null = null;
+  @Input() table:string | undefined = undefined;
 
-  @Input() imageId:number | null = null;
+  //? imageId: para actualizar una foto de Education, Skills, Experience, Projects
+  @Input() imageId:number | undefined = undefined;
 
-  @Input() to:string | null = null;
+  //? to: para actualizar la foto del banner o perfil
+  @Input() to:string | undefined = undefined;
  
 
   //Image

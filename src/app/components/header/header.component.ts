@@ -24,11 +24,17 @@ import { selectEditState } from 'src/app/state/AppSelectors';
               <li>
                 <a href="https://api.whatsapp.com/send?phone=5493816065882" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
               </li>
+              <li>
+                <a href="https://www.linkedin.com/in/franco-javier-alvarez-301105230/" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+              </li>
+              <li>
+                <a href="https://github.com/49888" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i></a>
+              </li>
             </ul>
 
-            <a class="btn btn-success my-0 mx-2" *ngIf="!(edit$ | async)" routerLink="/login">Login</a>
+            <a class="btn btn-success my-0 mx-2" *ngIf="!(edit$ | async)" routerLink="/session">Login</a>
 
-            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="true" (click)="this.enableEdit()">Salir</button>
+            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="(edit$ | async)" (click)="this.enableEdit()">Salir</button>
           </div>
         </div>
       </nav>
@@ -64,7 +70,7 @@ export class HeaderComponent implements OnInit {
 
   enableEdit(){
 
-    console.log("Edit mode");
+    localStorage.removeItem('token');
 
     this.store.dispatch(edit());
   }

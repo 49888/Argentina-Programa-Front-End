@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+body {
+	background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
+	background-repeat: no-repeat;
+	min-height: 100vh;
+}
+
 /*! Establecer el tamaĆ±o de los Croppers de la Pagina */
 .cropper img {
     max-height: 400px !important;

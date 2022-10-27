@@ -60,4 +60,13 @@ interface ImageDataUpload {
     to?:string //banner or perfil
 }
 
-export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData, ImageDataUpload, CreateData}
+interface AccessTokenResponse {
+    access_token:string 
+    client_id:string 
+    expires_in:string  
+    issued_at:string  
+    issuer:string  
+    token_type:string 
+}
+
+export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData, ImageDataUpload, CreateData, AccessTokenResponse}
