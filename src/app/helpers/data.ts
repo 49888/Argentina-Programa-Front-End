@@ -61,5 +61,7 @@ export const data:Data = {
       percentage: 60,
       img: 'assets/image/java.png'
     }
-  ]
+  ],
+
+  projects: []
 }

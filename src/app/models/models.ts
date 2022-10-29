@@ -1,6 +1,6 @@
 
 
-interface Banner {
+export interface Banner {
     id:number,
     name:string | null,
     bannerImg:string | null,
@@ -9,58 +9,67 @@ interface Banner {
     title:string | null
 }
 
-interface Skill {
+export interface Skill {
     id:number
     title:string | null
     percentage:number | null 
     img:string | null
 }
 
-interface CardData {
+export interface CardData {
     id:number
     title:string | null
     description:string | null
     img:string | null
 }
 
+export interface Project {
+    id:number
+    name:string | null,
+    description:string | null
+    github:string | null,
+    ghPages:string | null
+}
 
-interface Data {
+
+export interface Data {
     banner:Banner
     education:CardData[]
     experience:CardData[]
-    skills:Skill[]
+    skills:Skill[],
+    projects:Project[]
 }
 
-interface DataState {
+export interface DataState {
     loading:boolean
     data:Data | null
 }
 
-interface UpdateData {
+export interface UpdateData {
     id:number,
     table:string,
     data:any
 }
 
-interface DeleteData {
+export interface DeleteData {
     id:number,
     table:string
 }
 
-interface CreateData {
+export interface CreateData {
     table:string,
     data: any
 }
 
 
-interface ImageDataUpload {
+export interface ImageDataUpload {
     table:string,
     data:FormData,
     id?:number
     to?:string //banner or perfil
 }
 
-interface AccessTokenResponse {
+export interface AccessTokenResponse {
     access_token:string 
     client_id:string 
     expires_in:string  
@@ -69,4 +78,3 @@ interface AccessTokenResponse {
     token_type:string 
 }
 
-export {Skill, CardData, Banner, Data, DataState, UpdateData, DeleteData, ImageDataUpload, CreateData, AccessTokenResponse}

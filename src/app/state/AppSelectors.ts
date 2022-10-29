@@ -46,6 +46,12 @@ export const selectDataSkills = createSelector(selectDataState, (state:DataState
 });
 
 
+export const selectDataProjects = createSelector(selectDataState, (state:DataState) => {
+
+    return state.data?.projects;
+});
+
+
 
 
 

@@ -27,6 +27,8 @@ import { load } from '../../state/AppActions';
           <app-list-card table="experience" title="Experiencia" [data]="(data$ | async)?.experience"></app-list-card>
 
           <app-list-card table="education" title="Educacion" [data]="(data$ | async)?.education"></app-list-card>
+
+          <app-projects></app-projects>
         </div>
       </div>
 
@@ -38,7 +40,7 @@ import { load } from '../../state/AppActions';
 
         <div class="col-lg-6 col-xs-12 container-fluid">
 
-          <app-projects></app-projects>
+
         </div>
       </div>
 

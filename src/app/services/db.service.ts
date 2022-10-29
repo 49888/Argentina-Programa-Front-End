@@ -7,7 +7,7 @@ import { delay } from 'rxjs/operators'
 
 import { CreateData, Data, DeleteData, ImageDataUpload, UpdateData } from '../models/models';
 
-import { END_POINTS } from '../helpers/API';
+import { API, END_POINTS, server } from '../helpers/API';
 import { data } from '../helpers/data';
 
 
@@ -30,7 +30,8 @@ export class DB {
         banner: this.http.get(END_POINTS.banner.get),
         skills: this.http.get(END_POINTS.skills.get),
         education: this.http.get(END_POINTS.education.get),
-        experience: this.http.get(END_POINTS.experience.get)
+        experience: this.http.get(END_POINTS.experience.get),
+        projects: this.http.get(END_POINTS.projects.get)
       });
  
       return obs$;
@@ -41,7 +42,7 @@ export class DB {
 
   createData({table, data}:CreateData):Observable<any> {
 
-    let url:string = END_POINTS[table as keyof typeof END_POINTS].create;
+    let url:string = END_POINTS[table as keyof API].create;
 
     console.log('create data: ', {table, url, data});
 
@@ -64,7 +65,7 @@ export class DB {
 
   updateData({id, table, data}:UpdateData):Observable<any> {
 
-    let url:string = END_POINTS[table as keyof typeof END_POINTS].update;
+    let url:string = END_POINTS[table as keyof API].update;
 
     url = (table !== 'banner' ? url + id : url);
 
@@ -90,7 +91,7 @@ export class DB {
 
   deleteData({id, table}:DeleteData):Observable<any> {
 
-    let url:string = END_POINTS[table as keyof typeof END_POINTS].delete;
+    let url:string = END_POINTS[table as keyof API].delete;
 
     url = (table !== 'banner' ? url + id : url);
 
@@ -114,7 +115,7 @@ export class DB {
   
   updateImage({table, data}:ImageDataUpload):Observable<any> {
 
-    let url:string = END_POINTS[table as keyof typeof END_POINTS].updateImage;
+    let url:string = END_POINTS[table as keyof API].updateImage + "";
 
 
     console.log('update image: ', {table, url, data});

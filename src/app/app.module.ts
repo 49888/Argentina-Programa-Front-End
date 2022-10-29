@@ -48,6 +48,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { LoginBackgroundComponent } from './components/login/login-background.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoaderComponent } from './components/main/loader.component';
+import { CardProjectComponent } from './components/projects/CardProject.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { LoaderComponent } from './components/main/loader.component';
     CardTitleDescriptionComponent,
     LoginBackgroundComponent,
     LoginComponent,
-    LoaderComponent
+    LoaderComponent,
+    CardProjectComponent
   ],
 
   imports: [

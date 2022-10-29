@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Banner, CardData, Data, DataState, Skill } from "../models/models";
+import { Banner, CardData, Data, DataState, Project, Skill } from "../models/models";
 import { created, deletedAction, edit, load, loaded, updated, updatedImageAction } from "./AppActions";
 
 const initialState:DataState = {
@@ -21,7 +21,7 @@ const loadingReducer = createReducer(initialState,
     }),
     on(updated, (state, {table, data}) => {
 
-        let aux = {...state.data};
+        let aux:any = {...state.data};
 
         
 
@@ -51,7 +51,7 @@ const loadingReducer = createReducer(initialState,
 
             let array = (aux[table as keyof typeof aux] as CardData[] & Skill[])?.filter(item => item.id !== data.id);
 
-            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner;
+            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner & Project[];
         }
 
         return {...state, data: aux as Data};
@@ -66,7 +66,7 @@ const loadingReducer = createReducer(initialState,
             let array = [...(aux[table as keyof typeof aux] as CardData[] & Skill[]), data];
 
 
-            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner;
+            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner & Project[];
         }
         
 
@@ -85,7 +85,7 @@ const loadingReducer = createReducer(initialState,
 
             let array = (aux[table as keyof typeof aux] as CardData[] & Skill[])?.map(item => item.id == data.id ? data : item);
 
-            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner;
+            aux[table as keyof typeof aux] = array as CardData[] & Skill[] & Banner & Project[];
         }
 
         return {...state, data: aux as Data};

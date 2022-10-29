@@ -2,15 +2,17 @@
 {
     
     "/api/*": {
-        "target": "http://localhost:8080",
-        "secure": false,
-        "logLevel": "debug"
+        "target": "https://argentina-programa-backend-992.herokuapp.com",
+        "secure": true,
+        "logLevel": "debug",
+        "changeOrigin": true
     },
 
     "/login/*": {
-        "target": "http://localhost:8080",
-        "secure": false,
-        "logLevel": "debug"
+        "target": "https://argentina-programa-backend-992.herokuapp.com",
+        "secure": true,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
         
 }

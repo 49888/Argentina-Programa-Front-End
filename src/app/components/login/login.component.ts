@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { login } from 'src/app/helpers/API';
+import { login, server } from 'src/app/helpers/API';
 import { AccessTokenResponse } from 'src/app/models/models';
 import { edit } from 'src/app/state/AppActions';
 
@@ -39,6 +39,7 @@ import { edit } from 'src/app/state/AppActions';
       
       <div class="bg-light text-center m-2">
         <button type="button" class="btn btn-success" (click)="validate()">Validate Token</button>
+        <button type="button" class="btn btn-success" (click)="activate()">Validate Token</button>
       </div>
      </app-login-bg>
   `,
@@ -126,6 +127,11 @@ export class LoginComponent implements OnInit {
     });
 
     obs$.subscribe(value => console.log(value));
+  }
+
+  activate(){
+    this.store.dispatch(edit());
+    this.router.navigate(['/']);
   }
 
 }
