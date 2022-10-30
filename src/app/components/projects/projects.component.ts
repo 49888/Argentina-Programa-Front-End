@@ -8,7 +8,7 @@ import { selectDataProjects, selectEditState } from 'src/app/state/AppSelectors'
   selector: 'app-projects',
   template: `
     <div>
-      <h4 class="border-bottom border-light p-2">Experiencia</h4>
+      <h4 class="border-bottom border-light p-2">Proyectos</h4>
       <div class="container-fluid">
         
         <app-card-project *ngFor="let item of (projects$ | async); index as i;" [value]="item" table="projects"></app-card-project>

@@ -47,6 +47,11 @@ import { selectEditState } from 'src/app/state/AppSelectors';
 
   styles: [
     `
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
       .Redes li a {
         padding: 7px;
       }

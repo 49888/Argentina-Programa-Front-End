@@ -11,8 +11,10 @@ import { load } from '../../state/AppActions';
 
   template: `
 
-    <h4 class="bg-light" style="position: fixed; bottom: 0">Loading: {{loading$ | async | json}} Edit mode: {{edit$ | async | json}}</h4>
-    
+    <!--
+      <h4 class="bg-light" style="position: fixed; bottom: 0">Loading: {{loading$ | async | json}} Edit mode: {{edit$ | async | json}}</h4>
+    -->
+
     <main class="container-fluid text-light" *ngIf="!(loading$ | async)">
 
       <div class="row">
@@ -47,6 +49,8 @@ import { load } from '../../state/AppActions';
     </main>
 
     <app-loader *ngIf="(loading$ | async)"></app-loader>
+
+    <app-footer></app-footer>
   `,
 
   styles: [``]

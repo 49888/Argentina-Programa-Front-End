@@ -63,5 +63,27 @@ export const data:Data = {
     }
   ],
 
-  projects: []
+  projects: [
+    {
+      id: 1,
+      name: 'Argentina Programa Front end',
+      description: 'Front end del portfolio hecho en Angular con bootstrap, ngrx, chart js, cropper js',
+      github: 'https://github.com/49888/Argentina-Programa-Front-End',
+      ghPages: 'nada aun'
+    },
+    {
+      id: 2,
+      name: 'Argentina Programa Backend',
+      description: 'API Rest hecha en Java con Spring Boot usando ademas Spring Security, Gson, Fusion auth JWT, Firebase Admin',
+      github: 'https://github.com/49888/Argentina-Programa-Back-end',
+      ghPages: 'https://argentina-programa-backend-992.herokuapp.com/'
+    },
+    {
+      id: 5,
+      name: 'Franco Gadea',
+      description: '1812',
+      github: 'si funciona',
+      ghPages: 'nada aun x2'
+    }
+  ]
 }

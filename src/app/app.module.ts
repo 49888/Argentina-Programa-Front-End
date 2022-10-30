@@ -49,6 +49,7 @@ import { LoginBackgroundComponent } from './components/login/login-background.co
 import { LoginComponent } from './components/login/login.component';
 import { LoaderComponent } from './components/main/loader.component';
 import { CardProjectComponent } from './components/projects/CardProject.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { CardProjectComponent } from './components/projects/CardProject.componen
     LoginBackgroundComponent,
     LoginComponent,
     LoaderComponent,
-    CardProjectComponent
+    CardProjectComponent,
+    FooterComponent
   ],
 
   imports: [

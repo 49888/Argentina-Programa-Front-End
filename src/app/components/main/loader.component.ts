@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
     styles: [`
         .loader-container {
-            width: 100vw;    height: calc(100vh - 96px);
+            height: calc(100vh - 96px - 247px);
             display: flex;
             justify-content: center;
             align-items: center;  

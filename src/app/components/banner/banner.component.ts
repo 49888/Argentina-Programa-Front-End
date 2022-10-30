@@ -17,7 +17,7 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
       
       <div class="container-fluid p-2">
 
-        <div class="row align-items-end">
+        <div class="row align-items-start">
 
           <div class="col-5 p-2 m-2">
             

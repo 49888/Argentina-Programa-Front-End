@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     template: `
         <!-- Redes -->
         <div class="Redes"> 
-            <ul class="d-flex justify-content-evenly p-0" style="list-style: none;">
+            <ul class="d-flex justify-content-evenly p-0 m-0" style="list-style: none;">
                 <li class="text-center">
                     <a href="mailto:murillofausto619@gmail.com?subject=Vi%20tu%20Portfolio" target="_blank" rel="noopener noreferrer"><i class="bi bi-google"></i></a>
                 </li>
@@ -25,7 +25,7 @@ import { Component, OnInit } from '@angular/core';
 
     styles: [`
         .Redes .bi {
-            color: black;
+            color: white;
             font-size: 25px;
         }
         .Redes .bi:hover {
