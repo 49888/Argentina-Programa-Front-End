@@ -22,13 +22,14 @@ import { Component, OnInit } from '@angular/core';
 
             <div class="bg-dark p-4 d-flex justify-content-center" style="min-height: 50px;">
                 <div class="w-25">
-                    <app-banner-redes></app-banner-redes>
+                    <app-banner-redes class="text-light" color="white"></app-banner-redes>
                 </div>
             </div>
         </footer>
     `,
 
     styles: [`
+
         .waves {
             position: relative;
             bottom: 0;

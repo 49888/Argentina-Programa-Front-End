@@ -25,7 +25,7 @@ import { selectDataBanner, selectEditState } from 'src/app/state/AppSelectors';
             <app-banner-perfil [image]="(banner$ | async)?.perfilImg" [name]="(banner$ | async)?.name"></app-banner-perfil>
 
             <!--Banner Redes-->
-            <app-banner-redes></app-banner-redes>
+            <app-banner-redes color="black"></app-banner-redes>
 
           </div>
 
