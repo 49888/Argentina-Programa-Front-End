@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { create } from 'src/app/state/AppActions';
-import { selectDataState } from 'src/app/state/AppSelectors';
+import { Observable } from 'rxjs';
+import { create, resetError } from 'src/app/state/AppActions';
+import { selectDataState, selectError } from 'src/app/state/AppSelectors';
 
 @Component({
   selector: 'app-modal-create-chart',
@@ -12,6 +13,12 @@ import { selectDataState } from 'src/app/state/AppSelectors';
       <div class="Modal" (mousedown)="closeWithClick($event)" #modalBack>
 
         <div class="Modal-content rounded bg-light p-2 w-50">
+
+          <div class="alert alert-danger" role="alert" *ngIf="(error$ | async)?.error">
+            <h4 class="alert-heading">Ocurrio un Error</h4>
+            <hr>
+            <p class="mb-0">{{(error$ | async)?.message}}</p>
+          </div>
           
           <div>
             <h3 class="text-dark">{{title}}</h3>
@@ -57,6 +64,8 @@ export class ModalCreateChartComponent implements OnInit {
   @Input() table:string = '';
 
   
+  protected error$:Observable<any> = new Observable();
+
 
   @ViewChild('modalBack') modalBack:ElementRef | null = null; 
 
@@ -65,6 +74,8 @@ export class ModalCreateChartComponent implements OnInit {
   constructor(private store:Store<any>){}
 
   ngOnInit(): void {
+
+    this.error$ = this.store.select(selectError);
 
     this.store.select(selectDataState).subscribe(() => {
 
@@ -78,6 +89,8 @@ export class ModalCreateChartComponent implements OnInit {
 
   hideModal(){
     this.show = false;
+
+    this.store.dispatch(resetError());
   }
 
   onSubmit(e:any){

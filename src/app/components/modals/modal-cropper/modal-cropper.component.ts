@@ -1,10 +1,11 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CropperComponent } from 'angular-cropperjs';
+import { Observable } from 'rxjs';
 import { ImageDataUpload } from 'src/app/models/models';
 import { Base64Service } from 'src/app/services/base64.service';
-import { updateImageAction } from 'src/app/state/AppActions';
-import { selectDataState } from 'src/app/state/AppSelectors';
+import { resetError, updateImageAction } from 'src/app/state/AppActions';
+import { selectDataState, selectError } from 'src/app/state/AppSelectors';
 
 @Component({
   selector: 'app-modal-cropper',
@@ -13,6 +14,12 @@ import { selectDataState } from 'src/app/state/AppSelectors';
       
       <div class="Modal" (mousedown)="closeWithClick($event)" #modalBack>
         <div class="Modal-content rounded bg-light p-2 w-75">
+
+          <div class="alert alert-danger" role="alert" *ngIf="(error$ | async)?.error">
+            <h4 class="alert-heading">Ocurrio un Error</h4>
+            <hr>
+            <p class="mb-0">{{(error$ | async)?.message}}</p>
+          </div>
           
           <div class="text-dark">
             <h3>{{title}}</h3>
@@ -89,6 +96,8 @@ import { selectDataState } from 'src/app/state/AppSelectors';
 })
 export class ModalCropperComponent implements OnInit {
 
+  protected error$:Observable<any> = new Observable();
+
   @Input() title:string = '';
 
   @Input() type:string = '';
@@ -134,6 +143,8 @@ export class ModalCropperComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.error$ = this.store.select(selectError);
+
     this.store.select(selectDataState).subscribe(() => {
 
       this.hideModal();
@@ -165,6 +176,8 @@ export class ModalCropperComponent implements OnInit {
 
   hideModal(){
     this.show = false;
+
+    this.store.dispatch(resetError());
   }
 
   closeWithClick(e:any){

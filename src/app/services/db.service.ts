@@ -23,7 +23,7 @@ export class DB {
 
   getData():Observable<any> {
 
-    //?Local data
+    /*//?Local data
       return of(data).pipe(delay(1500), catchError((err)=>{
 
         console.log('ERROR!', err)
@@ -71,7 +71,14 @@ export class DB {
 
       //obs$.subscribe((value) => console.log(value));
 
-      return obs$;
+      return obs$.pipe( catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }) );
     //*/
       
     //return of({table, data: 'OK'});
@@ -97,7 +104,14 @@ export class DB {
 
       //obs$.subscribe(value => console.log(value))
 
-      return obs$;
+      return obs$.pipe( catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }) );
     //*/
 
     //return of({table, data: 'OK'});
@@ -121,7 +135,14 @@ export class DB {
         table: of(table)
       });
 
-      return obs$;
+      return obs$.pipe( catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }) );
     //*/
 
     //return of({table, data: 'OK'});
@@ -149,7 +170,14 @@ export class DB {
 
       //obs$.subscribe((value) => console.log(value));
 
-      return obs$;
+      return obs$.pipe( catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }) );
     //*/  
 
     //return of({table, data: 'OK'});

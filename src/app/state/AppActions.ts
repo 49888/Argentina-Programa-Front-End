@@ -31,3 +31,5 @@ export {load, loaded, edit, update, updated, deleteAction, deletedAction, create
 
 
 export const error = createAction('[DB Service] Error', props<{error:boolean, message: string}>());
+
+export const resetError = createAction('[DB Service] clear error');

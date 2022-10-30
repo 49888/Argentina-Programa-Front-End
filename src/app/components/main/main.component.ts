@@ -48,7 +48,7 @@ import { load } from '../../state/AppActions';
 
     </main>
 
-    <div class="Error" *ngIf="(error$ | async)?.error">
+    <div class="Error" *ngIf="(error$ | async)?.error && (loading$ | async)">
       <div class="alert alert-danger w-50" role="alert">
         <h4 class="alert-heading">Ocurrio un Error</h4>
         <hr>
