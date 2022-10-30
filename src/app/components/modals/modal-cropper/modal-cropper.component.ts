@@ -4,6 +4,7 @@ import { CropperComponent } from 'angular-cropperjs';
 import { ImageDataUpload } from 'src/app/models/models';
 import { Base64Service } from 'src/app/services/base64.service';
 import { updateImageAction } from 'src/app/state/AppActions';
+import { selectDataState } from 'src/app/state/AppSelectors';
 
 @Component({
   selector: 'app-modal-cropper',
@@ -129,9 +130,14 @@ export class ModalCropperComponent implements OnInit {
     protected showCropper:boolean = false;
   //*/
 
-  constructor(private read:Base64Service, private store:Store){}
+  constructor(private read:Base64Service, private store:Store<any>){}
 
   ngOnInit(): void {
+
+    this.store.select(selectDataState).subscribe(() => {
+
+      this.hideModal();
+    })
 
     switch(true){
 

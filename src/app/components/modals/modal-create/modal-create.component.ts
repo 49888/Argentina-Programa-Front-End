@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { create } from 'src/app/state/AppActions';
+import { selectDataState } from 'src/app/state/AppSelectors';
 
 @Component({
   selector: 'app-modal-create',
@@ -61,6 +62,11 @@ export class ModalCreateComponent implements OnInit {
   constructor(private store:Store<any>){}
 
   ngOnInit(): void {
+
+    this.store.select(selectDataState).subscribe(() => {
+
+      this.hideModal();
+    })
   }
 
   showModal(){
