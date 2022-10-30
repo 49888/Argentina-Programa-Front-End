@@ -16,55 +16,57 @@ export interface API {
   projects:END_POINT
 }
 
+export const server:string = "https://argentina-programa-backend-992.herokuapp.com";
+
 export const END_POINTS:API = {
 
   banner: {
-    get: "/api/banner/get",
-    update: "/api/banner/update",
-    delete: '/api/banner/delete',
-    create: '/api/banner/create',
-    updateImage: '/api/banner/images/update'
+    get: server + "/api/banner/get",
+    update: server + "/api/banner/update",
+    delete: server + '/api/banner/delete',
+    create: server + '/api/banner/create',
+    updateImage: server + '/api/banner/images/update'
   },
 
   skills: {
-    get: "/api/skills/get",
-    create: "/api/skills/create",
-    update: "/api/skills/update/",
-    delete: "/api/skills/delete/",
-    updateImage: '/api/skills/images/update' 
+    get: server + "/api/skills/get",
+    create: server + "/api/skills/create",
+    update: server + "/api/skills/update/",
+    delete: server + "/api/skills/delete/",
+    updateImage: server + '/api/skills/images/update' 
   },
 
   education: {
-    get: "/api/education/get",
-    create: "/api/education/create",
-    update: "/api/education/update/",
-    delete: "/api/education/delete/",
-    updateImage: '/api/education/images/update' 
+    get: server + "/api/education/get",
+    create: server + "/api/education/create",
+    update: server + "/api/education/update/",
+    delete: server + "/api/education/delete/",
+    updateImage: server + '/api/education/images/update' 
   },
   
   experience: {
-    get: "/api/experience/get",
-    create: "/api/experience/create",
-    update: "/api/experience/update/",
-    delete: "/api/experience/delete/",
-    updateImage: '/api/experience/images/update' 
+    get: server + "/api/experience/get",
+    create: server + "/api/experience/create",
+    update: server + "/api/experience/update/",
+    delete: server + "/api/experience/delete/",
+    updateImage: server + '/api/experience/images/update' 
   },
 
   projects: {
-    get: "/api/projects/get",
-    create: "/api/projects/create",
-    update: "/api/projects/update/",
-    delete: "/api/projects/delete/"
+    get: server + "/api/projects/get",
+    create: server + "/api/projects/create",
+    update: server + "/api/projects/update/",
+    delete: server + "/api/projects/delete/"
   }
 }
 
-export const server:string = "https://argentina-programa-backend-992.herokuapp.com";
+
 
 //export const server:string = "";
 
 
 export const login = {
-  token: '/login',
-  info: '/api/auth/info'
+  token: server + '/login',
+  info: server + '/api/auth/info'
 }
   

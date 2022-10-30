@@ -1,6 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { login } from 'src/app/helpers/API';
 import { edit } from 'src/app/state/AppActions';
 import { selectEditState } from 'src/app/state/AppSelectors';
 
@@ -32,9 +35,10 @@ import { selectEditState } from 'src/app/state/AppSelectors';
               </li>
             </ul>
 
-            <a class="btn btn-success my-0 mx-2" *ngIf="!(edit$ | async)" routerLink="/session">Login</a>
 
-            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="(edit$ | async)" (click)="this.enableEdit()">Salir</button>
+            <button class="btn btn-success my-0 mx-2" *ngIf="!(edit$ | async)" (click)="this.login()">Login</button>
+
+            <button type="button" class="btn btn-danger my-0 mx-2" *ngIf="(edit$ | async)" (click)="this.salir()">Salir</button>
           </div>
         </div>
       </nav>
@@ -61,18 +65,48 @@ export class HeaderComponent implements OnInit {
 
   protected edit$:Observable<boolean> = new Observable();
 
-  constructor(private store:Store<any>){}
+  constructor(private http:HttpClient, private router:Router, private store:Store<any>){}
 
   ngOnInit(): void {
 
     this.edit$ = this.store.select(selectEditState);
   }
 
-  enableEdit(){
-
-    localStorage.removeItem('token');
+  salir(){
 
     this.store.dispatch(edit());
+  }
+
+  login(){
+
+    const token = window.sessionStorage.getItem('token');
+
+    if(!token){
+
+      this.router.navigate(['/session']);
+
+      return;
+    }
+
+    const obs$ = this.http.get(login.info, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    });
+
+    obs$.subscribe({
+
+      next: (response:any) => {
+
+        console.log("Bienvenido: ", response?.name);
+        this.store.dispatch(edit());
+      },
+
+      error: (error) => {
+
+        this.router.navigate(['/session']);
+      }
+    });
   }
 
 }

@@ -142,7 +142,7 @@ export class DB {
 
   private authorization():HttpHeaders {
 
-    const token = localStorage.getItem('token');
+    const token = window.sessionStorage.getItem('token');
 
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`

@@ -50,9 +50,9 @@ import { create } from 'src/app/state/AppActions';
 export class ModalCreateComponent implements OnInit {
 
   
-  @Input() title:string = '';
+  @Input() title:string | undefined = undefined;
 
-  @Input() table:string = '';
+  @Input() table:string | undefined = undefined;
 
   @ViewChild('modalBack') modalBack:ElementRef | null = null; 
 
@@ -85,7 +85,7 @@ export class ModalCreateComponent implements OnInit {
     console.log(data);
 
     let aux = {
-      table: this.table,
+      table: this.table as string,
       data
     }
 

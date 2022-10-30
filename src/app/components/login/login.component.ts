@@ -37,10 +37,6 @@ import { edit } from 'src/app/state/AppActions';
         </div>
       </form>
       
-      <div class="bg-light text-center m-2">
-        <button type="button" class="btn btn-success" (click)="validate()">Validate Token</button>
-        <button type="button" class="btn btn-success" (click)="activate()">Validate Token</button>
-      </div>
      </app-login-bg>
   `,
   styles: [
@@ -90,11 +86,9 @@ export class LoginComponent implements OnInit {
     
         console.log(response);
     
-        if(response.status)
+        window.sessionStorage.setItem('token', (<AccessTokenResponse> response).access_token);
     
-        localStorage.setItem('token', (<AccessTokenResponse> response).access_token);
-    
-        if((<AccessTokenResponse> response).access_token){
+        if((<AccessTokenResponse> response).access_token && window.sessionStorage.getItem('token')){
     
           this.store.dispatch(edit());
           this.router.navigate(['/']);

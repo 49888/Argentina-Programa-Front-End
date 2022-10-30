@@ -23,7 +23,7 @@ import { selectEditState } from 'src/app/state/AppSelectors';
                 <button class="btn btn-success position-absolute bottom-0 end-0" (click)="modal.showModal()">Add</button>
 
                 <!-- create modal -->
-                <app-modal-create title="Agregar" [table]="'education'" #modal>
+                <app-modal-create title="Agregar" [table]="table" #modal>
                     <div class="mb-3">
                         <input type="text" class="form-control" name="title" placeholder="Titulo">
                     </div>

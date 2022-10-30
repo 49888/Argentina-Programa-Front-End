@@ -22,7 +22,7 @@ import { CardData } from '../../models/models';
         <button class="btn btn-success position-absolute bottom-0 end-0" (click)="createModal.showModal()">Add</button>
 
         <!-- create modal -->
-        <app-modal-create title="Agregar" [title]="'Agregar'" [table]="'experience'" #createModal>
+        <app-modal-create title="Agregar" [table]="'experience'" #createModal>
           <div class="mb-3">
             <input type="text" class="form-control" name="title" placeholder="Titulo">
           </div>
