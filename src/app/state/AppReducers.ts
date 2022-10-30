@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { Banner, CardData, Data, DataState, Project, Skill } from "../models/models";
-import { created, deletedAction, edit, load, loaded, updated, updatedImageAction } from "./AppActions";
+import { created, deletedAction, edit, error, load, loaded, updated, updatedImageAction } from "./AppActions";
 
 const initialState:DataState = {
     loading: false,
@@ -102,4 +102,16 @@ const EditReducer = createReducer(false,
 );
 
 export {loadingReducer, EditReducer}
+
+
+
+
+export const ErrorReducer = createReducer({error: false, message: ''}, 
+
+    on(error, (state, {error, message}) => {
+
+        return {...state, error, message};
+    }) 
+
+);
 

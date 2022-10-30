@@ -28,3 +28,6 @@ const updateImageAction = createAction('[modal crop] update image from database'
 const updatedImageAction = createAction('[modal crop] updated image from database', props<{table:string, data:any}>());
 
 export {load, loaded, edit, update, updated, deleteAction, deletedAction, create, created, updateImageAction, updatedImageAction};
+
+
+export const error = createAction('[DB Service] Error', props<{error:boolean, message: string}>());

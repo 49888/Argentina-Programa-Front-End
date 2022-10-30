@@ -2,13 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ofType } from '@ngrx/effects';
 
-import { forkJoin, from, Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators'
+import { EMPTY, forkJoin, from, Observable, of } from 'rxjs';
+import { catchError, delay } from 'rxjs/operators'
 
 import { CreateData, Data, DeleteData, ImageDataUpload, UpdateData } from '../models/models';
 
 import { API, END_POINTS, server } from '../helpers/API';
 import { data } from '../helpers/data';
+import { Store } from '@ngrx/store';
+import { error } from '../state/AppActions';
 
 
 @Injectable({
@@ -16,13 +18,20 @@ import { data } from '../helpers/data';
 })
 export class DB {
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient, private store:Store<any>){}
 
 
   getData():Observable<any> {
 
-    /*//?Local data
-      return of(data).pipe(delay(1500));
+    //?Local data
+      return of(data).pipe(delay(1500), catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }));
     //*/
 
     //*Data from API
@@ -34,7 +43,14 @@ export class DB {
         projects: this.http.get(END_POINTS.projects.get)
       });
  
-      return obs$;
+      return obs$.pipe( catchError((err)=>{
+
+        console.log('ERROR!', err)
+
+        this.store.dispatch( error({error: true, message: err.message}) );
+
+        return EMPTY;
+      }) );
     //*/  
   }
 

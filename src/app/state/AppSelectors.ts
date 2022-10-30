@@ -52,6 +52,11 @@ export const selectDataProjects = createSelector(selectDataState, (state:DataSta
 });
 
 
+export const selectError = (state:AppState) => {
+
+    return state.Error;
+}
+
 
 
 

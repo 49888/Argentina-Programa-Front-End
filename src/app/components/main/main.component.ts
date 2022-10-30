@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Data } from 'src/app/models/models';
 
-import { selectData, selectEditState, selectLoading } from 'src/app/state/AppSelectors';
+import { selectData, selectEditState, selectError, selectLoading } from 'src/app/state/AppSelectors';
 import { load } from '../../state/AppActions';
 
 @Component({
@@ -48,12 +48,27 @@ import { load } from '../../state/AppActions';
 
     </main>
 
-    <app-loader *ngIf="(loading$ | async)"></app-loader>
+    <div class="Error" *ngIf="(error$ | async)?.error">
+      <div class="alert alert-danger w-50" role="alert">
+        <h4 class="alert-heading">Ocurrio un Error</h4>
+        <hr>
+        <p class="mb-0">{{(error$ | async)?.message}}</p>
+      </div>
+    </div>
+
+    <app-loader *ngIf="(loading$ | async) && !(error$ | async)?.error"></app-loader>
 
     <app-footer></app-footer>
   `,
 
-  styles: [``]
+  styles: [`
+    .Error {
+      height: calc(100vh - 96px - 247px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  `]
 })
 export class MainComponent implements OnInit {
 
@@ -62,6 +77,8 @@ export class MainComponent implements OnInit {
   protected loading$:Observable<boolean> = new Observable();
 
   protected user:object | null = {};
+
+  protected error$:Observable<any> = new Observable();
 
 
   protected data$:Observable<Data | null> = new Observable();
@@ -75,6 +92,8 @@ export class MainComponent implements OnInit {
     this.data$ = this.store.select(selectData);
 
     this.edit$ = this.store.select(selectEditState);
+
+    this.error$ = this.store.select(selectError);
 
     this.store.dispatch(load());
   }
