@@ -60,7 +60,7 @@ export class DB {
 
     let url:string = END_POINTS[table as keyof API].create;
 
-    console.log('create data: ', {table, url, data});
+    //console.log('create data: ', {table, url, data});
 
 
     //*Peticion a la API
@@ -93,7 +93,7 @@ export class DB {
     url = (table !== 'banner' ? url + id : url);
 
 
-    console.log('update data: ', {table, data, url});
+    //console.log('update data: ', {table, data, url});
 
 
     //*Peticion a la API
@@ -126,7 +126,7 @@ export class DB {
     url = (table !== 'banner' ? url + id : url);
 
 
-    console.log('delete data: ', {table, url});
+    //console.log('delete data: ', {table, url});
 
 
     //*Petition a la API
@@ -155,11 +155,11 @@ export class DB {
     let url:string = END_POINTS[table as keyof API].updateImage + "";
 
 
-    console.log('update image: ', {table, url, data});
+    //console.log('update image: ', {table, url, data});
 
 
     //Mostrar el Form
-    Array(...data.entries()).forEach( item => console.log('update image form: ', item) );
+    //Array(...data.entries()).forEach( item => console.log('update image form: ', item) );
 
 
     //*Peticion a la API

@@ -103,7 +103,7 @@ export class ModalChartComponent implements OnInit {
       data = {...data, [item[0]]: item[1]};
     }
 
-    console.log('Modal-chart form data: ', data);
+    //console.log('Modal-chart form data: ', data);
 
     let aux = {
       table: this.table,

@@ -103,7 +103,7 @@ export class ModalCreateComponent implements OnInit {
       data = {...data, [item[0]]: item[1]};
     }
 
-    console.log(data);
+    //console.log(data);
 
     let aux = {
       table: this.table as string,

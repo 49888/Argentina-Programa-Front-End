@@ -201,7 +201,7 @@ export class ModalCropperComponent implements OnInit {
 
     const file:File | null = formData.get('image') as File;
     
-    console.log(file);
+    //console.log(file);
 
     if(file.size !== 0){
       this.imageName = file.name;
@@ -234,7 +234,7 @@ export class ModalCropperComponent implements OnInit {
 
   protected subirImagen(){
 
-    console.log('subiendo...');
+    //console.log('subiendo...');
 
     if(this.imageBlob && this.imageName){
 

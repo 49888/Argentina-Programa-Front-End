@@ -109,7 +109,7 @@ export class ModalDeleteComponent implements OnInit {
       id: data['id' as keyof typeof data]
     }
 
-    console.log('Delete Modal: ', aux);
+    //console.log('Delete Modal: ', aux);
 
     this.store.dispatch(deleteAction( {deleteData: aux} ));
     //*/
